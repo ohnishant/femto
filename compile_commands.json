@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Wno-strict-prototypes",
+      "-pedantic",
+      "-std=c99",
+      "-Iinclude/",
+      "-o",
+      "femto",
+      "femto.c"
+    ],
+    "directory": "/home/nish/Projects/kilo",
+    "file": "/home/nish/Projects/kilo/femto.c",
+    "output": "/home/nish/Projects/kilo/femto"
+  }
+]
