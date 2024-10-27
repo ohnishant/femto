@@ -1,5 +1,5 @@
-#ifndef KILO_H
-#define KILO_H 1
+#ifndef FEMTO_H
+#define FEMTO_H 1
 
 #include <termios.h>
 
@@ -64,4 +64,4 @@ void editorOpen();
 #define ABUF_INIT { NULL, 0 }
 int abAppend(struct AppendBuffer* ab, const char* s, int len);
 
-#endif // !KILO_H
+#endif // !FEMTO_H

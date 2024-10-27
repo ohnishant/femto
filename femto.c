@@ -15,7 +15,7 @@
 
 #include "femto.h"
 
-#define KILO_VERSION "0.1.0"
+#define FEMTO_VERSION "0.1.0"
 
 struct EditorConfig E;
 
@@ -200,7 +200,7 @@ void editorDrawRows(struct AppendBuffer* abuf) {
         if (i >= E.numRows) {
             if (i == E.screenRows / 3 && E.numRows == 0) {
                 char welcome[80];
-                int welcomelen = snprintf(welcome, sizeof(welcome), "Kilo Editor -- Version %s", KILO_VERSION);
+                int welcomelen = snprintf(welcome, sizeof(welcome), "Femto Editor -- Version %s", FEMTO_VERSION);
                 if (welcomelen > E.screenCols) {
                     welcomelen = E.screenCols;
                 }
@@ -349,7 +349,7 @@ void initEditor() {
 
 int main(int argc, char* argv[]) {
     fprintf(stderr, "-----------------------------------------\r\n");
-    fprintf(stderr, "\n\n[INFO]:\tKilo Editor Version %s\r\n", KILO_VERSION);
+    fprintf(stderr, "\n\n[INFO]:\tFemto Editor Version %s\r\n", FEMTO_VERSION);
     enableRawMode();
     initEditor();
 
