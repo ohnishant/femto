@@ -195,8 +195,9 @@ void editorOpen(char* filename) {
 }
 
 void editorDrawRows(struct AppendBuffer* abuf) {
-    for (int i = 0; i < E.screenRows - 1; ++i) {
-
+    // -1 for status bar
+    for (int i = 0 + E.rowOffset; i < E.screenRows + E.rowOffset - 1; ++i) {
+        int renderingRow = i + E.rowOffset;
         if (i >= E.numRows) {
             if (i == E.screenRows / 3 && E.numRows == 0) {
                 char welcome[80];
@@ -218,12 +219,12 @@ void editorDrawRows(struct AppendBuffer* abuf) {
             }
         } else {
             /*fprintf(stderr, "[INFO]:\tWriting row - \t %s\r\n", E.rows[i].chars);*/
-            int len = E.rows[i].size;
+            int len = E.rows[renderingRow].size;
             if (len > E.screenCols) {
                 len = E.screenCols;
             }
 
-            abAppend(abuf, E.rows[i].chars, len);
+            abAppend(abuf, E.rows[i + E.rowOffset].chars, len);
         }
 
         abAppend(abuf, "\x1b[K", 3);
@@ -266,6 +267,10 @@ void editorMoveCursor(char key) {
     case KEY_MOVE_DOWN:
         // Extra line for statusbar
         if (E.cursorY >= E.screenRows - 2) {
+            E.rowOffset++;
+            if (E.rowOffset > E.numRows - E.screenRows) {
+                E.rowOffset = E.numRows - E.screenRows;
+            }
             break;
         }
         E.cursorY++;
@@ -278,6 +283,10 @@ void editorMoveCursor(char key) {
         break;
     case KEY_MOVE_UP:
         if (E.cursorY <= 0) {
+            E.rowOffset--;
+            if (E.rowOffset-- <= 0) {
+                E.rowOffset = 0;
+            }
             break;
         }
         E.cursorY--;
@@ -341,6 +350,7 @@ void initEditor() {
     E.editorMode = EDITOR_MODE_NORMAL;
     E.numRows = 0;
     E.rows = NULL;
+    E.rowOffset = 0;
 
     if (getScreenSize(&E.screenRows, &E.screenCols) == -1) {
         die("getScreenSize");

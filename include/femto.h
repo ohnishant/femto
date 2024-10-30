@@ -22,6 +22,7 @@ struct EditorConfig {
     int screenCols;
     int cursorX;
     int cursorY;
+    int rowOffset;
     int numRows;
     editorRow* rows;
 };
